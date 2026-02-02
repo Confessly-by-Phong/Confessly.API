@@ -1,1 +1,16 @@
-<Solution />
+<Solution>
+  <Folder Name="/1. API/">
+    <Project Path="Confessly.API/Confessly.API.csproj" Id="47ab1a03-2ede-4753-ad44-4a8423cfa119" />
+  </Folder>
+  <Folder Name="/2. Business/">
+    <Project Path="Confessly.Logging/Confessly.Logging.csproj" />
+  </Folder>
+  <Folder Name="/3. Data/">
+    <Project Path="Confessly.Contracts/Confessly.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/4. Domain/">
+    <Project Path="Confessly.Domain/Confessly.Domain.csproj" />
+    <Project Path="Confessly.Repository/Confessly.Repository.csproj" />
+  </Folder>
+  <Folder Name="/5. Shared/" />
+</Solution>
