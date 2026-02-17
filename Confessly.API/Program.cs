@@ -1,3 +1,5 @@
+using Confessly.Configuration;
+using Confessly.Contracts.Authentication;
 using Confessly.Logging.Extensions;
 using Serilog;
 
@@ -13,14 +15,19 @@ namespace Confessly.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpContextAccessor();
 
             // Configure Serilog
             builder.Services.AddConfesslySerilog(builder.Environment);
             builder.Services.AddConfesslyLogging();
 
+            ConfesslyConfiguration.Initialize(builder.Configuration);
+
             // Clear default logging providers and use Serilog
             builder.Logging.ClearProviders();
             builder.Host.UseSerilog();
+
+            builder.Services.AddConfesslyDependencyInjection(builder.Environment);
 
             var app = builder.Build();
 

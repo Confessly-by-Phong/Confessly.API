@@ -17,6 +17,14 @@ namespace Confessly.Domain
             _userContext = userContext;
         }
 
+        internal ConfesslyDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        #region DbSets
+        public DbSet<User> Users { get; set; }
+        #endregion
+
         public override int SaveChanges()
         {
             SetAuditFields();

@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Confessly.Configuration\Confessly.Configuration.csproj" />
+    <ProjectReference Include="..\Confessly.Contracts\Confessly.Contracts.csproj" />
+    <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
     <ProjectReference Include="..\Confessly.Logging\Confessly.Logging.csproj" />
+    <ProjectReference Include="..\Confessly.Repository\Confessly.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

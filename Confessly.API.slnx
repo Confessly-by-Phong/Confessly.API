@@ -12,5 +12,7 @@
     <Project Path="Confessly.Domain/Confessly.Domain.csproj" />
     <Project Path="Confessly.Repository/Confessly.Repository.csproj" />
   </Folder>
-  <Folder Name="/5. Shared/" />
+  <Folder Name="/5. Shared/">
+    <Project Path="Confessly.Configuration/Confessly.Configuration.csproj" Id="6ce7c186-a4e8-428a-adb4-9a04d20178d7" />
+  </Folder>
 </Solution>
