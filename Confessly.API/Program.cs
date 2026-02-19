@@ -32,9 +32,13 @@ namespace Confessly.API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            
+
+            // Add exception handling middleware early in the pipeline to catch unhandled exceptions
+            app.UseExceptionHandler(_ => { });
+
             // Add request logging middleware early in the pipeline
             app.UseRequestLogging();
+
 
             app.UseHttpsRedirection();
             app.UseAuthorization();

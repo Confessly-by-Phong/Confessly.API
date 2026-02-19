@@ -17,10 +17,7 @@
     <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
     <ProjectReference Include="..\Confessly.Logging\Confessly.Logging.csproj" />
     <ProjectReference Include="..\Confessly.Repository\Confessly.Repository.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Confessly.Services\Confessly.Services.csproj" />
   </ItemGroup>
 
 </Project>

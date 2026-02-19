@@ -1,8 +1,10 @@
-﻿using Confessly.Configuration;
+﻿using Confessly.API.Middlewares;
+using Confessly.Configuration;
 using Confessly.Contracts.Authentication;
 using Confessly.Domain;
 using Confessly.Repository;
 using Confessly.Repository.Core;
+using Confessly.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Confessly.API
@@ -13,6 +15,7 @@ namespace Confessly.API
             this IServiceCollection services, IWebHostEnvironment environment)
         {
             services.AddTransient<IUserContext, UserContext>();
+            services.AddExceptionHandler<ExceptionHandlingMiddleware>();
 
             #region DbContext
             services.AddDbContextPool<ConfesslyDbContext>(options =>
@@ -32,6 +35,10 @@ namespace Confessly.API
 
             #region UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #endregion
+
+            #region Services
+            services.AddScoped<UserServices>();
             #endregion
 
             return services;

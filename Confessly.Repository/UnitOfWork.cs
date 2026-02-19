@@ -15,11 +15,18 @@ namespace Confessly.Repository
         private readonly ILoggingService _logger;
         private readonly IPerformanceLogger _performanceLogger;
 
-        public UnitOfWork(ConfesslyDbContext dbContext, ILoggingService logger, IPerformanceLogger performanceLogger)
+        #region Repositories
+        public IRepository<User> Users { get; }
+        #endregion
+
+        public UnitOfWork(ConfesslyDbContext dbContext, 
+            ILoggingService logger, IPerformanceLogger performanceLogger, 
+            IRepository<User> users)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _performanceLogger = performanceLogger ?? throw new ArgumentNullException(nameof(performanceLogger));
+            Users = users;
         }
 
         public void Dispose()
