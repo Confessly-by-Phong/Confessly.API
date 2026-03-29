@@ -15,9 +15,9 @@ public static class PerformanceLoggingExtensions
     /// <param name="entityType">The type of entity being operated on.</param>
     /// <param name="recordCount">Number of records affected (optional).</param>
     /// <returns>Disposable tracker for the operation.</returns>
-    public static IDisposable TrackDatabaseOperation(this IPerformanceLogger performanceLogger, 
-        string operation, 
-        string entityType, 
+    public static IDisposable TrackDatabaseOperation(this IPerformanceLogger performanceLogger,
+        string operation,
+        string entityType,
         int? recordCount = null)
     {
         var properties = new Dictionary<string, object>
@@ -43,9 +43,9 @@ public static class PerformanceLoggingExtensions
     /// <param name="endpoint">The API endpoint.</param>
     /// <param name="userId">The user ID if available.</param>
     /// <returns>Disposable tracker for the operation.</returns>
-    public static IDisposable TrackApiEndpoint(this IPerformanceLogger performanceLogger, 
-        string httpMethod, 
-        string endpoint, 
+    public static IDisposable TrackApiEndpoint(this IPerformanceLogger performanceLogger,
+        string httpMethod,
+        string endpoint,
         object? userId = null)
     {
         var properties = new Dictionary<string, object>
@@ -70,8 +70,8 @@ public static class PerformanceLoggingExtensions
     /// <param name="operationName">Name of the business operation.</param>
     /// <param name="additionalContext">Additional context for the operation.</param>
     /// <returns>Disposable tracker for the operation.</returns>
-    public static IDisposable TrackBusinessOperation(this IPerformanceLogger performanceLogger, 
-        string operationName, 
+    public static IDisposable TrackBusinessOperation(this IPerformanceLogger performanceLogger,
+        string operationName,
         Dictionary<string, object>? additionalContext = null)
     {
         var properties = new Dictionary<string, object>
@@ -98,10 +98,10 @@ public static class PerformanceLoggingExtensions
     /// <param name="entityType">The entity type.</param>
     /// <param name="recordCount">Number of records affected.</param>
     /// <param name="duration">Duration of the operation.</param>
-    public static void LogRepositoryMetrics(this ILoggingService loggingService, 
-        string operation, 
-        string entityType, 
-        int recordCount, 
+    public static void LogRepositoryMetrics(this ILoggingService loggingService,
+        string operation,
+        string entityType,
+        int recordCount,
         TimeSpan duration)
     {
         var properties = new Dictionary<string, object>
@@ -116,7 +116,7 @@ public static class PerformanceLoggingExtensions
 
         using (loggingService.BeginScope(properties))
         {
-            loggingService.LogInformation("Repository {Operation} on {EntityType} processed {RecordCount} records in {Duration}ms", 
+            loggingService.LogInformation("Repository {Operation} on {EntityType} processed {RecordCount} records in {Duration}ms",
                 operation, entityType, recordCount, duration.TotalMilliseconds);
         }
     }

@@ -1,5 +1,4 @@
 using Confessly.Configuration;
-using Confessly.Contracts.Authentication;
 using Confessly.Logging.Extensions;
 using Serilog;
 

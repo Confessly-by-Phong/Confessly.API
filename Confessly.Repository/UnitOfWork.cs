@@ -1,11 +1,9 @@
 ﻿using Confessly.Domain;
+using Confessly.Infrastructure;
 using Confessly.Logging.Extensions;
 using Confessly.Logging.Interfaces;
 using Confessly.Repository.Core;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Confessly.Repository
 {
@@ -19,8 +17,8 @@ namespace Confessly.Repository
         public IRepository<User> Users { get; }
         #endregion
 
-        public UnitOfWork(ConfesslyDbContext dbContext, 
-            ILoggingService logger, IPerformanceLogger performanceLogger, 
+        public UnitOfWork(ConfesslyDbContext dbContext,
+            ILoggingService logger, IPerformanceLogger performanceLogger,
             IRepository<User> users)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
@@ -47,7 +45,7 @@ namespace Confessly.Repository
         public async Task<int> SaveChanges(CancellationToken cancellationToken = default)
         {
             using var performanceTracker = _performanceLogger.TrackDatabaseOperation("SaveChanges", "UnitOfWork");
-            
+
             var stopwatch = Stopwatch.StartNew();
 
             try
@@ -55,7 +53,7 @@ namespace Confessly.Repository
                 _logger.LogDebug("Starting SaveChanges operation");
 
                 var changeCount = await _dbContext.SaveChangesAsync(cancellationToken);
-                
+
                 stopwatch.Stop();
 
                 if (changeCount > 0)

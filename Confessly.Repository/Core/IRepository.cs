@@ -1,8 +1,5 @@
 ﻿using Confessly.Domain.Core;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Confessly.Repository.Core
 {

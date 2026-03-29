@@ -79,7 +79,7 @@ public class PerformanceLogger : IPerformanceLogger
     public void LogOperationDuration(string operationName, TimeSpan duration, Dictionary<string, object>? additionalProperties = null)
     {
         var properties = CreateLogProperties(operationName, duration, additionalProperties);
-        _loggingService.LogInformation("Operation {OperationName} completed in {Duration}ms", 
+        _loggingService.LogInformation("Operation {OperationName} completed in {Duration}ms",
             operationName, duration.TotalMilliseconds);
     }
 
@@ -88,10 +88,10 @@ public class PerformanceLogger : IPerformanceLogger
     {
         var properties = CreateLogProperties(operationName, duration, additionalProperties);
         properties["Status"] = "Success";
-        
+
         using (_loggingService.BeginScope(properties))
         {
-            _loggingService.LogInformation("Operation {OperationName} succeeded in {Duration}ms", 
+            _loggingService.LogInformation("Operation {OperationName} succeeded in {Duration}ms",
                 operationName, duration.TotalMilliseconds);
         }
     }
@@ -102,10 +102,10 @@ public class PerformanceLogger : IPerformanceLogger
         var properties = CreateLogProperties(operationName, duration, additionalProperties);
         properties["Status"] = "Failed";
         properties["ExceptionType"] = exception.GetType().Name;
-        
+
         using (_loggingService.BeginScope(properties))
         {
-            _loggingService.LogError(exception, "Operation {OperationName} failed after {Duration}ms", 
+            _loggingService.LogError(exception, "Operation {OperationName} failed after {Duration}ms",
                 operationName, duration.TotalMilliseconds);
         }
     }

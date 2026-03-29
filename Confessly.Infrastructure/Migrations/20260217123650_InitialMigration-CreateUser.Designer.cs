@@ -3,17 +3,20 @@ using System;
 using Confessly.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Confessly.Domain.Migrations
+namespace Confessly.Infrastructure.Migrations
 {
     [DbContext(typeof(ConfesslyDbContext))]
-    partial class ConfesslyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260217123650_InitialMigration-CreateUser")]
+    partial class InitialMigrationCreateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

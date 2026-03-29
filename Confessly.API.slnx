@@ -9,11 +9,14 @@
   <Folder Name="/3. Data/">
     <Project Path="D:/Tran Phong/Projects/Confessly/Code/Confessly.API/Confessly.Contracts/Confessly.Contracts.csproj" />
   </Folder>
-  <Folder Name="/4. Domain/">
-    <Project Path="D:/Tran Phong/Projects/Confessly/Code/Confessly.API/Confessly.Domain/Confessly.Domain.csproj" />
+  <Folder Name="/4. Infrastructure/">
+    <Project Path="Confessly.Infrastructure/Confessly.Infrastructure.csproj" Id="3769843d-1ce4-4a92-92c6-d6f339f14b5b" />
     <Project Path="D:/Tran Phong/Projects/Confessly/Code/Confessly.API/Confessly.Repository/Confessly.Repository.csproj" />
   </Folder>
-  <Folder Name="/5. Shared/">
+  <Folder Name="/5. Domain/">
+    <Project Path="D:/Tran Phong/Projects/Confessly/Code/Confessly.API/Confessly.Domain/Confessly.Domain.csproj" />
+  </Folder>
+  <Folder Name="/6. Shared/">
     <Project Path="ConfesslyValidators/ConfesslyValidators.csproj" Id="fa308332-aea4-4ee1-9de7-39f784d94b79" />
     <Project Path="D:/Tran Phong/Projects/Confessly/Code/Confessly.API/Confessly.Configuration/Confessly.Configuration.csproj" Id="6ce7c186-a4e8-428a-adb4-9a04d20178d7" />
     <Project Path="Messages/Confessly.Messages.csproj" Id="320a3ef3-0e28-4736-8c94-145b6677f7b1" />

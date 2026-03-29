@@ -1,8 +1,5 @@
 ﻿using Confessly.Logging.Interfaces;
 using Confessly.Repository.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Confessly.Services.Core
 {

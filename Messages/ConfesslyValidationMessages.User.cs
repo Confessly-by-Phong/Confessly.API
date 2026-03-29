@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Confessly.Messages
+﻿namespace Confessly.Messages
 {
     public static partial class ConfesslyValidationMessages
     {

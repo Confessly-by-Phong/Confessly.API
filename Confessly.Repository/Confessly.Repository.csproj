@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
+    <ProjectReference Include="..\Confessly.Infrastructure\Confessly.Infrastructure.csproj" />
     <ProjectReference Include="..\Confessly.Logging\Confessly.Logging.csproj" />
   </ItemGroup>
 

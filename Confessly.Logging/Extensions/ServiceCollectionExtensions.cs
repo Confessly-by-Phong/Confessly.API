@@ -34,8 +34,8 @@ public static class ServiceCollectionExtensions
     /// <param name="hostEnvironment">The host environment.</param>
     /// <param name="configureLogger">Optional additional logger configuration.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddConfesslySerilog(this IServiceCollection services, 
-        IHostEnvironment hostEnvironment, 
+    public static IServiceCollection AddConfesslySerilog(this IServiceCollection services,
+        IHostEnvironment hostEnvironment,
         Action<LoggerConfiguration>? configureLogger = null)
     {
         var loggerConfig = new LoggerConfiguration()
@@ -83,8 +83,8 @@ public static class ServiceCollectionExtensions
     /// <param name="applicationInsightsConnectionString">Application Insights connection string.</param>
     /// <param name="configureLogger">Optional additional logger configuration.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddConfesslySerilogWithApplicationInsights(this IServiceCollection services, 
-        IHostEnvironment hostEnvironment, 
+    public static IServiceCollection AddConfesslySerilogWithApplicationInsights(this IServiceCollection services,
+        IHostEnvironment hostEnvironment,
         string applicationInsightsConnectionString,
         Action<LoggerConfiguration>? configureLogger = null)
     {

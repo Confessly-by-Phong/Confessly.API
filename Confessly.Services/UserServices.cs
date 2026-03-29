@@ -4,9 +4,6 @@ using Confessly.Repository.Core;
 using Confessly.Services.Core;
 using Confessly.Services.Validation;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Confessly.Services
 {

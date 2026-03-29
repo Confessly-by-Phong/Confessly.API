@@ -2,6 +2,7 @@
 using Confessly.Configuration;
 using Confessly.Contracts.Authentication;
 using Confessly.Domain;
+using Confessly.Infrastructure;
 using Confessly.Repository;
 using Confessly.Repository.Core;
 using Confessly.Services;

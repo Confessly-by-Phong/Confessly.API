@@ -1,8 +1,6 @@
 using Confessly.Logging.Interfaces;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using Serilog.Context;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Confessly.Logging.Services;
 
@@ -69,7 +67,7 @@ public class SerilogService : ILoggingService
     public IDisposable BeginScope(Dictionary<string, object> properties)
     {
         var enrichers = new List<IDisposable>();
-        
+
         foreach (var property in properties)
         {
             enrichers.Add(LogContext.PushProperty(property.Key, property.Value));

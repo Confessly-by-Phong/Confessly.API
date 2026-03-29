@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Confessly.Contracts.Core
+﻿namespace Confessly.Contracts.Core
 {
     public class ConfesslyResponse<T>
     {
@@ -12,7 +8,7 @@ namespace Confessly.Contracts.Core
         public string? TraceId { get; init; }
 
         public static ConfesslyResponse<T> Ok(T data, string? traceId = null)
-            => new ()
+            => new()
             {
                 Success = true,
                 Data = data,
@@ -20,7 +16,7 @@ namespace Confessly.Contracts.Core
             };
 
         public static ConfesslyResponse<T> Fail(string message, string? traceId = null)
-            => new ()
+            => new()
             {
                 Success = false,
                 Message = message,

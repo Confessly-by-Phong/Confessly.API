@@ -1,7 +1,4 @@
 ﻿using Confessly.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Confessly.Repository.Core
 {
