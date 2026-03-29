@@ -64,7 +64,7 @@ public class RequestLoggingMiddleware
                 //    context.Response.StatusCode, 
                 //    stopwatch.ElapsedMilliseconds);
 
-                _loggingService.LogInformation("Completed request {RequestPath} with status {StatusCode",
+                _loggingService.LogInformation("Completed request {RequestPath} with status {StatusCode}",
                     requestPath,
                     context.Response.StatusCode);
             }

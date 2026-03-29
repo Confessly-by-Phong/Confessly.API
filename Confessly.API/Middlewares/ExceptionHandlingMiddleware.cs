@@ -23,7 +23,7 @@ namespace Confessly.API.Middlewares
                 default:
                     httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     response = ConfesslyResponse<object>.Fail(
-                        string.Format(ConfesslyExceptionMessages.InternalServerError, exception.Message), traceId);
+                        string.Format(ConfesslyExceptionMessages.InternalServerError, exception.ConfesslyMessage()), traceId);
                     break;
             }
             await httpContext.Response.WriteAsJsonAsync(response, cancellationToken);

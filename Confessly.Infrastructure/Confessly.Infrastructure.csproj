@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Confessly.Configuration\Confessly.Configuration.csproj" />
     <ProjectReference Include="..\Confessly.Contracts\Confessly.Contracts.csproj" />
     <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />

@@ -3,11 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Confessly.Domain
 {
-    public class User : BaseEntity
+    public class User : BaseEntity, IUser
     {
-        [Required] public string Username { get; set; } = string.Empty;
-        [Required] public string Password { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public string? Name { get; set; } = string.Empty;
+        
+        public User() { }
 
+        public User(IUser user)
+        {
+            Username = user.Username;
+            Password = user.Password;
+            Name = user.Name;
+        }
     }
 }

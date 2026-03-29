@@ -1,4 +1,5 @@
-﻿using Confessly.Contracts.Core;
+﻿using Confessly.Contracts.Authentication;
+using Confessly.Contracts.Core;
 using Confessly.Domain;
 using Confessly.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -29,11 +30,11 @@ namespace Confessly.API.Controllers
         [ProducesResponseType<ConfesslyResponse<User>>(200)]
         [ProducesResponseType<ConfesslyResponse<object>>(400)]
         [ProducesResponseType<ConfesslyResponse<object>>(500)]
-        public async Task<IActionResult> Register([FromBody] User user,
+        public async Task<IActionResult> Register([FromBody] UserCreate user,
             CancellationToken cancellationToken)
         {
             User createdUser = await _userServices.CreateUser(user, cancellationToken);
-            return StatusCode(200, createdUser);
+            return ApiOk(createdUser);
         }
     }
 }

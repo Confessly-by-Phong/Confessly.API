@@ -1,4 +1,6 @@
-﻿using Confessly.Domain;
+﻿using Confessly.Contracts.Authentication;
+using Confessly.Domain;
+using Confessly.Domain.Core;
 using Confessly.Logging.Interfaces;
 using Confessly.Repository.Core;
 using Confessly.Services.Core;
@@ -9,16 +11,18 @@ namespace Confessly.Services
 {
     public class UserServices : BaseServices
     {
-        private readonly PasswordHasher<User> _passwordHasher;
+        private readonly PasswordHasher<IUser> _passwordHasher;
 
         public UserServices(IUnitOfWork work, ILoggingService logger) : base(work, logger)
         {
-            _passwordHasher = new PasswordHasher<User>();
+            _passwordHasher = new PasswordHasher<IUser>();
         }
 
-        public async Task<User> CreateUser(User user, CancellationToken cancellationToken)
+        public async Task<User> CreateUser(UserCreate userCreate, CancellationToken cancellationToken)
         {
-            user.Validate();
+            var user = userCreate.ToUser();
+
+            await user.Validate(_work.Users);
             user.Password = HashPassword(user);
             var createdUser = await _work.Users.Insert(user, cancellationToken);
             await _work.SaveChanges(cancellationToken);

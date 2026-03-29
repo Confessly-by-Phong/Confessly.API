@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
     <ProjectReference Include="..\Messages\Confessly.Messages.csproj" />
   </ItemGroup>
 

@@ -4,7 +4,7 @@ namespace Confessly.Domain.Core
 {
     public abstract class BaseEntity
     {
-        [Key]
+        //[Key]
         public Guid Id { get; set; } = Guid.CreateVersion7();
         public bool IsDeleted { get; set; } = false;
         public Guid CreatedBy { get; set; }
