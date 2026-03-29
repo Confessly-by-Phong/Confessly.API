@@ -15,7 +15,7 @@ namespace Confessly.Services.Validation
                 throw new ConfesslyValidationException(ConfesslyValidationMessages.UserCannotBeNull);
 
             user.Username.StringValidate(nameof(user.Username), false, 5, 50);
-            user.Password.StringValidate(nameof(user.Password), false);
+            user.Password.StringValidate(nameof(user.Password), false, 10);
 
             var existingUser = await repository.Get(u => u.Username.ToLower() == user.Username.ToLower());
             if (existingUser is not null)
