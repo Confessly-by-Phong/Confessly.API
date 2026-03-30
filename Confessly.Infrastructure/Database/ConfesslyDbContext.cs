@@ -3,7 +3,7 @@ using Confessly.Domain;
 using Confessly.Domain.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace Confessly.Infrastructure
+namespace Confessly.Infrastructure.Database
 {
     public class ConfesslyDbContext : DbContext
     {

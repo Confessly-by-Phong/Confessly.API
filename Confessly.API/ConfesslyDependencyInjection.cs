@@ -2,10 +2,12 @@
 using Confessly.Configuration;
 using Confessly.Contracts.Authentication;
 using Confessly.Domain;
-using Confessly.Infrastructure;
+using Confessly.Infrastructure.Authentication;
+using Confessly.Infrastructure.Database;
 using Confessly.Repository;
 using Confessly.Repository.Core;
 using Confessly.Services;
+using Confessly.Services.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Confessly.API
@@ -38,8 +40,13 @@ namespace Confessly.API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             #endregion
 
+            #region Infrastructure
+            services.AddSingleton<IConfesslyAuthentication, ConfesslyAuthentication>();
+            #endregion
+
             #region Services
-            services.AddScoped<UserServices>();
+            services.AddScoped<IAuthenticationServices, AuthenticationServices>();
+            services.AddScoped<IUserServices, UserServices>();
             #endregion
 
             return services;

@@ -31,14 +31,17 @@ namespace Confessly.Configuration
         public static string ConnectionString(string connectionStringKey)
             => Configuration.GetConnectionString(connectionStringKey) ?? "";
 
-        public static string ValidAudience
-            => Configuration.GetSection("JWT")["ValidAudience"] ?? "";
+        public static string JWTAudience
+            => Configuration.GetSection("JWT")["Audience"] ?? "";
 
-        public static string ValidIssuer
-            => Configuration.GetSection("JWT")["ValidIssuer"] ?? "";
+        public static string JWTIssuer
+            => Configuration.GetSection("JWT")["Issuer"] ?? "";
 
-        public static string Secret
+        public static string JWTSecret
             => Configuration.GetSection("JWT")["Secret"] ?? "";
+
+        public static int JWTExpirationMinutes
+            => int.Parse(Configuration.GetSection("JWT")["ExpirationMinutes"] ?? "15");
         #endregion
     }
 }

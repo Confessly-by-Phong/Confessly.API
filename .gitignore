@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Development files
+appsettings.Development.json
+/Confessly.API/appsettings.Development.json

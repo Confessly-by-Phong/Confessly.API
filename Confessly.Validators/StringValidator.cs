@@ -1,5 +1,4 @@
 ﻿using Confessly.Messages;
-using Confessly.Validators;
 
 namespace Confessly.Validators
 {

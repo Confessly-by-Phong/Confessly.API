@@ -1,6 +1,5 @@
 ﻿using Confessly.Domain;
 using Confessly.Domain.Core;
-using System.ComponentModel.DataAnnotations;
 
 namespace Confessly.Contracts.Authentication
 {
@@ -8,8 +7,21 @@ namespace Confessly.Contracts.Authentication
     {
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string? Name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public User ToUser() => new User(this);
+        public User ToUser()
+        {
+            var user = new User
+            {
+                Username = this.Username,
+                Password = this.Password,
+                Name = this.Name
+            };
+
+            if (string.IsNullOrWhiteSpace(user.Name))
+                user.Name = user.Username; // Default to username if name is not provided
+
+            return user;
+        }
     }
 }

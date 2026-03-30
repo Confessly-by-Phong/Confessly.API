@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Confessly.Domain.Core
+﻿namespace Confessly.Domain.Core
 {
     public abstract class BaseEntity
     {

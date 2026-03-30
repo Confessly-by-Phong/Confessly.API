@@ -1,5 +1,5 @@
 ﻿using Confessly.Domain.Core;
-using Confessly.Infrastructure;
+using Confessly.Infrastructure.Database;
 using Confessly.Logging.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
