@@ -1,11 +1,7 @@
 ﻿using Confessly.Domain;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Confessly.Infrastructure.Configuration
+namespace Confessly.Infrastructure.Database.Configuration
 {
     internal class UserEntityTypeConfiguration : BaseEntityTypeConfiguration<User>
     {

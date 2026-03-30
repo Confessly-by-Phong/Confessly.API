@@ -1,11 +1,8 @@
 ﻿using Confessly.Domain.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Confessly.Infrastructure.Configuration
+namespace Confessly.Infrastructure.Database.Configuration
 {
     internal abstract class BaseEntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : BaseEntity

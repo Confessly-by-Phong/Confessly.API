@@ -1,5 +1,4 @@
 ﻿using Confessly.Domain.Core;
-using System.ComponentModel.DataAnnotations;
 
 namespace Confessly.Domain
 {
@@ -7,8 +6,8 @@ namespace Confessly.Domain
     {
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string? Name { get; set; } = string.Empty;
-        
+        public string Name { get; set; } = string.Empty;
+
         public User() { }
 
         public User(IUser user)

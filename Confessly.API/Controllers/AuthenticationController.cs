@@ -1,7 +1,7 @@
 ﻿using Confessly.Contracts.Authentication;
 using Confessly.Contracts.Core;
 using Confessly.Domain;
-using Confessly.Services;
+using Confessly.Services.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Confessly.API.Controllers
@@ -10,11 +10,11 @@ namespace Confessly.API.Controllers
     [ApiController]
     public class AuthenticationController : ConfesslyBaseController
     {
-        private UserServices _userServices;
+        private IAuthenticationServices _authenticationServices;
 
-        public AuthenticationController(UserServices userServices)
+        public AuthenticationController(IAuthenticationServices authenticationServices)
         {
-            _userServices = userServices;
+            _authenticationServices = authenticationServices;
         }
 
         /// <summary>
@@ -33,8 +33,28 @@ namespace Confessly.API.Controllers
         public async Task<IActionResult> Register([FromBody] UserCreate user,
             CancellationToken cancellationToken)
         {
-            User createdUser = await _userServices.CreateUser(user, cancellationToken);
+            User createdUser = await _authenticationServices.CreateUser(user, cancellationToken);
             return ApiOk(createdUser);
+        }
+
+        /// <summary>
+        /// Authenticates a user with the provided login credentials and returns a JWT token.
+        /// </summary>
+        /// <remarks>Returns a 200 status code with a JWT token if authentication is successful, 400 if the request
+        /// is invalid or credentials are incorrect, or 500 if an internal server error occurs.</remarks>
+        /// <param name="userLogin">The user login credentials containing username and password for authentication.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the authentication operation.</param>
+        /// <returns>An <see cref="IActionResult"/> containing a JWT token wrapped in an anonymous object if
+        /// authentication is successful; otherwise, a <see cref="ConfesslyResponse{object}"/> with error details.</returns>
+        [HttpPost("login")]
+        [ProducesResponseType<string>(200)]
+        [ProducesResponseType<ConfesslyResponse<object>>(400)]
+        [ProducesResponseType<ConfesslyResponse<object>>(500)]
+        public async Task<IActionResult> Login([FromBody] UserLogin userLogin,
+            CancellationToken cancellationToken)
+        {
+            string token = await _authenticationServices.AuthenticateUser(userLogin.Username, userLogin.Password, cancellationToken);
+            return ApiOk(new { Token = token });
         }
     }
 }

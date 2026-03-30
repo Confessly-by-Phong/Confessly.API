@@ -1,5 +1,5 @@
 ﻿using Confessly.Domain;
-using Confessly.Infrastructure;
+using Confessly.Infrastructure.Database;
 using Confessly.Logging.Extensions;
 using Confessly.Logging.Interfaces;
 using Confessly.Repository.Core;
