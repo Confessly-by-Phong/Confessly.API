@@ -3,7 +3,6 @@ using Confessly.Domain.Core;
 using Confessly.Messages;
 using Confessly.Repository.Core;
 using Confessly.Validators;
-using ConfesslyValidators;
 
 namespace Confessly.Services.Validation
 {

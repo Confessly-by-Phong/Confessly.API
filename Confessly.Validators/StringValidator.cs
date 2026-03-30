@@ -1,7 +1,7 @@
 ﻿using Confessly.Messages;
 using Confessly.Validators;
 
-namespace ConfesslyValidators
+namespace Confessly.Validators
 {
     public static class StringValidator
     {

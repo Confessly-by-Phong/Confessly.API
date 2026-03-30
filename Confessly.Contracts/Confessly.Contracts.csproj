@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
-    <ProjectReference Include="..\Messages\Confessly.Messages.csproj" />
+    <ProjectReference Include="..\Confessly.Messages\Confessly.Messages.csproj" />
   </ItemGroup>
 
 </Project>

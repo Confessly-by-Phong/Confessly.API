@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Confessly.Messages\Confessly.Messages.csproj" />
     <ProjectReference Include="..\Confessly.Repository\Confessly.Repository.csproj" />
-    <ProjectReference Include="..\ConfesslyValidators\ConfesslyValidators.csproj" />
+    <ProjectReference Include="..\Confessly.Validators\Confessly.Validators.csproj" />
   </ItemGroup>
 
 </Project>
