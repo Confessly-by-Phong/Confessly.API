@@ -14,9 +14,9 @@ public static class ExceptionLoggingExtensions
     /// <param name="exception">The exception to log.</param>
     /// <param name="contextMessage">Additional context about when/where the exception occurred.</param>
     /// <param name="additionalProperties">Additional properties to include in the log.</param>
-    public static void LogExceptionWithContext(this ILoggingService loggingService, 
-        Exception exception, 
-        string contextMessage, 
+    public static void LogExceptionWithContext(this ILoggingService loggingService,
+        Exception exception,
+        string contextMessage,
         Dictionary<string, object>? additionalProperties = null)
     {
         var properties = new Dictionary<string, object>
@@ -55,10 +55,10 @@ public static class ExceptionLoggingExtensions
     /// <param name="operation">The repository operation that failed.</param>
     /// <param name="entityType">The type of entity involved.</param>
     /// <param name="entityId">The ID of the entity if available.</param>
-    public static void LogRepositoryException(this ILoggingService loggingService, 
-        Exception exception, 
-        string operation, 
-        string entityType, 
+    public static void LogRepositoryException(this ILoggingService loggingService,
+        Exception exception,
+        string operation,
+        string entityType,
         object? entityId = null)
     {
         var additionalProperties = new Dictionary<string, object>
@@ -73,8 +73,8 @@ public static class ExceptionLoggingExtensions
             additionalProperties["EntityId"] = entityId;
         }
 
-        loggingService.LogExceptionWithContext(exception, 
-            "Repository operation {Operation} failed for {EntityType}", 
+        loggingService.LogExceptionWithContext(exception,
+            "Repository operation {Operation} failed for {EntityType}",
             additionalProperties);
     }
 
@@ -86,10 +86,10 @@ public static class ExceptionLoggingExtensions
     /// <param name="httpMethod">The HTTP method.</param>
     /// <param name="endpoint">The API endpoint.</param>
     /// <param name="userId">The user ID if available.</param>
-    public static void LogApiException(this ILoggingService loggingService, 
-        Exception exception, 
-        string httpMethod, 
-        string endpoint, 
+    public static void LogApiException(this ILoggingService loggingService,
+        Exception exception,
+        string httpMethod,
+        string endpoint,
         object? userId = null)
     {
         var additionalProperties = new Dictionary<string, object>
@@ -104,8 +104,8 @@ public static class ExceptionLoggingExtensions
             additionalProperties["UserId"] = userId;
         }
 
-        loggingService.LogExceptionWithContext(exception, 
-            "API operation {HttpMethod} {Endpoint} failed", 
+        loggingService.LogExceptionWithContext(exception,
+            "API operation {HttpMethod} {Endpoint} failed",
             additionalProperties);
     }
 
@@ -116,9 +116,9 @@ public static class ExceptionLoggingExtensions
     /// <param name="validationErrors">Dictionary of validation errors.</param>
     /// <param name="operation">The operation that had validation errors.</param>
     /// <param name="additionalContext">Additional context information.</param>
-    public static void LogValidationErrors(this ILoggingService loggingService, 
-        Dictionary<string, string[]> validationErrors, 
-        string operation, 
+    public static void LogValidationErrors(this ILoggingService loggingService,
+        Dictionary<string, string[]> validationErrors,
+        string operation,
         Dictionary<string, object>? additionalContext = null)
     {
         var properties = new Dictionary<string, object>
@@ -139,7 +139,7 @@ public static class ExceptionLoggingExtensions
 
         using (loggingService.BeginScope(properties))
         {
-            loggingService.LogWarning("Validation failed for operation {Operation} with {ErrorCount} errors", 
+            loggingService.LogWarning("Validation failed for operation {Operation} with {ErrorCount} errors",
                 operation, properties["ErrorCount"]);
         }
     }

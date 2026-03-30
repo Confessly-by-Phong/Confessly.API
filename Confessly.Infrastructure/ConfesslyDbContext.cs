@@ -1,21 +1,28 @@
 ﻿using Confessly.Contracts.Authentication;
+using Confessly.Domain;
 using Confessly.Domain.Core;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Confessly.Domain
+namespace Confessly.Infrastructure
 {
     public class ConfesslyDbContext : DbContext
     {
-        private readonly IUserContext _userContext;
+        private readonly IUserContext? _userContext;
 
         public ConfesslyDbContext(DbContextOptions options,
             IUserContext userContext) : base(options)
         {
             _userContext = userContext;
         }
+
+        internal ConfesslyDbContext(DbContextOptions options) : base(options)
+        {
+            _userContext = null;
+        }
+
+        #region DbSets
+        public DbSet<User> Users { get; set; }
+        #endregion
 
         public override int SaveChanges()
         {
@@ -32,11 +39,12 @@ namespace Confessly.Domain
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
 
         private void SetAuditFields()
         {
-            Guid userId = _userContext.GetCurrentUserId();
+            Guid userId = _userContext?.GetCurrentUserId() ?? Guid.Empty;
             var now = DateTimeOffset.UtcNow;
 
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())

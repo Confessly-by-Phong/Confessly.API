@@ -1,11 +1,8 @@
-﻿using Confessly.Domain;
-using Confessly.Domain.Core;
+﻿using Confessly.Domain.Core;
+using Confessly.Infrastructure;
 using Confessly.Logging.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Confessly.Repository.Core
 {

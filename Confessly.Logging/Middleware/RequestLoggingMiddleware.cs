@@ -1,7 +1,6 @@
-using Confessly.Logging.Extensions;
 using Confessly.Logging.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Confessly.Logging.Middleware;
 
@@ -13,17 +12,17 @@ public class RequestLoggingMiddleware
     private readonly RequestDelegate _next;
     private readonly ILoggingService _loggingService;
     private readonly ICorrelationService _correlationService;
-    private readonly IPerformanceLogger _performanceLogger;
+    //private readonly IPerformanceLogger _performanceLogger;
 
-    public RequestLoggingMiddleware(RequestDelegate next, 
-        ILoggingService loggingService, 
+    public RequestLoggingMiddleware(RequestDelegate next,
+        ILoggingService loggingService,
         ICorrelationService correlationService,
         IPerformanceLogger performanceLogger)
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _loggingService = loggingService ?? throw new ArgumentNullException(nameof(loggingService));
         _correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
-        _performanceLogger = performanceLogger ?? throw new ArgumentNullException(nameof(performanceLogger));
+        //_performanceLogger = performanceLogger ?? throw new ArgumentNullException(nameof(performanceLogger));
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -39,52 +38,57 @@ public class RequestLoggingMiddleware
         var requestPath = $"{request.Method} {request.Path}";
 
         // Start performance tracking
-        using var performanceTracker = _performanceLogger.TrackApiEndpoint(
-            request.Method, 
-            request.Path, 
-            GetUserId(context));
+        //using var performanceTracker = _performanceLogger.TrackApiEndpoint(
+        //    request.Method, 
+        //    request.Path, 
+        //    GetUserId(context));
 
-        var stopwatch = Stopwatch.StartNew();
+        //var stopwatch = Stopwatch.StartNew();
 
         try
         {
             // Log request start
             using (_loggingService.BeginScope("RequestProcessing", correlationId))
             {
-                _loggingService.LogInformation("Started processing request {RequestPath} from {RemoteIpAddress}", 
-                    requestPath, 
+                _loggingService.LogInformation("Started processing request {RequestPath} from {RemoteIpAddress}",
+                    requestPath,
                     GetRemoteIpAddress(context));
 
                 await _next(context);
 
-                stopwatch.Stop();
+                //stopwatch.Stop();
 
                 // Log successful response
-                _loggingService.LogInformation("Completed request {RequestPath} with status {StatusCode} in {Duration}ms", 
-                    requestPath, 
-                    context.Response.StatusCode, 
-                    stopwatch.ElapsedMilliseconds);
+                //_loggingService.LogInformation("Completed request {RequestPath} with status {StatusCode} in {Duration}ms", 
+                //    requestPath, 
+                //    context.Response.StatusCode, 
+                //    stopwatch.ElapsedMilliseconds);
+
+                _loggingService.LogInformation("Completed request {RequestPath} with status {StatusCode}",
+                    requestPath,
+                    context.Response.StatusCode);
             }
         }
         catch (Exception ex)
         {
-            stopwatch.Stop();
+            //stopwatch.Stop();
 
             // Log request failure
             var properties = new Dictionary<string, object>
             {
                 ["RequestPath"] = requestPath,
                 ["StatusCode"] = context.Response.StatusCode,
-                ["Duration"] = stopwatch.ElapsedMilliseconds,
+                //["Duration"] = stopwatch.ElapsedMilliseconds,
                 ["RemoteIpAddress"] = GetRemoteIpAddress(context),
                 ["UserAgent"] = context.Request.Headers["User-Agent"].ToString()
             };
 
             using (_loggingService.BeginScope(properties))
             {
-                _loggingService.LogError(ex, "Request {RequestPath} failed after {Duration}ms", 
-                    requestPath, 
-                    stopwatch.ElapsedMilliseconds);
+                //_loggingService.LogError(ex, "Request {RequestPath} failed after {Duration}ms", 
+                //    requestPath, 
+                //    stopwatch.ElapsedMilliseconds);
+                _loggingService.LogError(ex, "Request {RequestPath} failed", requestPath);
             }
 
             throw; // Re-throw the exception
@@ -94,7 +98,7 @@ public class RequestLoggingMiddleware
     private string GetOrGenerateCorrelationId(HttpContext context)
     {
         // Check for existing correlation ID in headers
-        if (context.Request.Headers.TryGetValue("X-Correlation-ID", out var correlationId) && 
+        if (context.Request.Headers.TryGetValue("X-Correlation-ID", out var correlationId) &&
             !string.IsNullOrWhiteSpace(correlationId))
         {
             return correlationId.ToString();
@@ -119,10 +123,7 @@ public class RequestLoggingMiddleware
     private static object? GetUserId(HttpContext context)
     {
         // Try to get user ID from claims
-        var userIdClaim = context.User?.FindFirst("sub") ?? 
-                         context.User?.FindFirst("userId") ?? 
-                         context.User?.FindFirst("id");
-
+        var userIdClaim = context.User?.FindFirst(ClaimTypes.NameIdentifier);
         return userIdClaim?.Value;
     }
 }

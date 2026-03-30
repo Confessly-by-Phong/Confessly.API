@@ -1,14 +1,10 @@
-﻿using Confessly.Domain;
-using Confessly.Domain.Core;
+﻿using Confessly.Domain.Core;
+using Confessly.Infrastructure;
 using Confessly.Logging.Extensions;
 using Confessly.Logging.Interfaces;
 using Confessly.Repository.Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Confessly.Repository
 {
@@ -24,7 +20,7 @@ namespace Confessly.Repository
 
             try
             {
-                Logger.LogInformation("Deleting {EntityName} with ID {EntityId} (SoftDelete: {IsSoftDeleted})", 
+                Logger.LogInformation("Deleting {EntityName} with ID {EntityId} (SoftDelete: {IsSoftDeleted})",
                     EntityName, entity.Id, isSoftDeleted);
 
                 if (!isSoftDeleted)
@@ -33,7 +29,7 @@ namespace Confessly.Repository
                     return;
                 }
 
-                if (entity.IsDeleted) 
+                if (entity.IsDeleted)
                 {
                     Logger.LogWarning("{EntityName} with ID {EntityId} is already marked as deleted", EntityName, entity.Id);
                     return;
@@ -57,11 +53,11 @@ namespace Confessly.Repository
         {
             try
             {
-                Logger.LogInformation("Searching for {EntityName} to delete using predicate (SoftDelete: {IsSoftDeleted})", 
+                Logger.LogInformation("Searching for {EntityName} to delete using predicate (SoftDelete: {IsSoftDeleted})",
                     EntityName, isSoftDeleted);
 
                 TEntity? entity = await Table.SingleOrDefaultAsync(predicate, cancellationToken);
-                if (entity is null) 
+                if (entity is null)
                 {
                     Logger.LogWarning("No {EntityName} found matching the delete predicate", EntityName);
                     return;
@@ -83,7 +79,7 @@ namespace Confessly.Repository
         {
             try
             {
-                Logger.LogDebug("Getting {EntityName} using predicate (IncludeDeleted: {IncludeDeleted})", 
+                Logger.LogDebug("Getting {EntityName} using predicate (IncludeDeleted: {IncludeDeleted})",
                     EntityName, includeDeleted);
 
                 var query = AddDeletedFilter(Table, includeDeleted);
@@ -114,7 +110,7 @@ namespace Confessly.Repository
         {
             try
             {
-                Logger.LogDebug("Getting {EntityName} by ID {EntityId} (IncludeDeleted: {IncludeDeleted})", 
+                Logger.LogDebug("Getting {EntityName} by ID {EntityId} (IncludeDeleted: {IncludeDeleted})",
                     EntityName, id, includeDeleted);
 
                 var query = AddDeletedFilter(Table, includeDeleted);
@@ -145,15 +141,15 @@ namespace Confessly.Repository
         {
             try
             {
-                Logger.LogDebug("Getting {EntityName} collection using custom query (IncludeDeleted: {IncludeDeleted})", 
+                Logger.LogDebug("Getting {EntityName} collection using custom query (IncludeDeleted: {IncludeDeleted})",
                     EntityName, includeDeleted);
 
                 var query = AddDeletedFilter(Table, includeDeleted);
                 query = func(query);
 
                 var results = await query.ToListAsync(cancellationToken);
-                
-                Logger.LogInformation("Retrieved {Count} {EntityName} records using custom query", 
+
+                Logger.LogInformation("Retrieved {Count} {EntityName} records using custom query",
                     results.Count, EntityName);
 
                 return results;
@@ -171,12 +167,12 @@ namespace Confessly.Repository
         {
             try
             {
-                Logger.LogDebug("Getting all {EntityName} entities (IncludeDeleted: {IncludeDeleted})", 
+                Logger.LogDebug("Getting all {EntityName} entities (IncludeDeleted: {IncludeDeleted})",
                     EntityName, includeDeleted);
 
                 var query = AddDeletedFilter(Table, includeDeleted);
                 var results = await query.ToListAsync(cancellationToken);
-                
+
                 Logger.LogInformation("Retrieved {Count} {EntityName} records", results.Count, EntityName);
 
                 return results;
@@ -216,8 +212,8 @@ namespace Confessly.Repository
             CancellationToken cancellationToken = default)
         {
             ArgumentNullException.ThrowIfNull(entities);
-            
-            if (!entities.Any()) 
+
+            if (!entities.Any())
             {
                 Logger.LogWarning("Attempted to insert empty collection of {EntityName}", EntityName);
                 return [];

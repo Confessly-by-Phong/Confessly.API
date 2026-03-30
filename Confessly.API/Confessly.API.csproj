@@ -7,15 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Confessly.Configuration\Confessly.Configuration.csproj" />
+    <ProjectReference Include="..\Confessly.Contracts\Confessly.Contracts.csproj" />
+    <ProjectReference Include="..\Confessly.Domain\Confessly.Domain.csproj" />
+    <ProjectReference Include="..\Confessly.Infrastructure\Confessly.Infrastructure.csproj" />
     <ProjectReference Include="..\Confessly.Logging\Confessly.Logging.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Confessly.Repository\Confessly.Repository.csproj" />
+    <ProjectReference Include="..\Confessly.Services\Confessly.Services.csproj" />
   </ItemGroup>
 
 </Project>
